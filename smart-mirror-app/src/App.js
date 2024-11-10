@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import TimeDate from './components/TimeDate';
 import Weather from './components/Weather';
-import NewsFeed from './components/NewsFeed'; // Import the NewsFeed component
+import NewsFeed from './components/NewsFeed';
+import CalendarEvents from './components/CalendarEvents';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <p>Your smart mirror app for time, weather, news, and more!</p>
       <TimeDate />
       <Weather />
-      <NewsFeed /> {/* Add the NewsFeed component */}
+      <NewsFeed />
+      <CalendarEvents />
     </div>
   );
 }
