@@ -6,19 +6,20 @@ import Weather from './components/Weather';
 import NewsFeed from './components/NewsFeed';
 import CalendarEvents from './components/CalendarEvents';
 import FullScreenToggle from './components/FullScreenToggle';
+import TodoList from './components/TodoList';
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to SmartMirror</h1>
-      <p>Your smart mirror app for time, weather, news, and more!</p>
+      {/* To-Do List Button and List Display */}
+      <TodoList /> {/* Display To-Do List at the top center */}
       
       <TimeDate />
       <Weather />
       <NewsFeed />
       <CalendarEvents />
       
-      {/* Full-Screen Button in the bottom-left */}
+      {/* Full-Screen Button in the bottom-right */}
       <FullScreenToggle />
     </div>
   );

@@ -1,0 +1,76 @@
+/* TodoList.css */
+.todo-list-container {
+    position: absolute;
+    top: 20px; /* Adjust this to move closer to the top */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.todo-list-container h2 {
+    font-size: 2.5em; /* Increased font size */
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.new-todo-input {
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #61dafb;
+    background: none;
+    color: #ffffff;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+.add-todo-button {
+    font-size: 1em;
+    padding: 8px 12px;
+    color: #000000; /* Changed to black for better readability */
+    background-color: #ffffff; /* Changed to white */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-todo-button:hover {
+    background-color: #f0f0f0;
+}
+
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 1.5em; /* Increased font size for added items */
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid #61dafb;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.delete-button:hover {
+    transform: scale(1.2);
+}
