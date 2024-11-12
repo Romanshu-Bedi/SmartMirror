@@ -1,75 +1,48 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 /* General App Styling */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #0d0d0d, #1c1c1c); /* Dark gradient background */
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif; /* Use Roboto font for a modern look */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 .App {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #000; /* Dark background for smart mirror look */
-  color: #fff; /* White text color for contrast */
-  font-family: Arial, sans-serif;
+  width: 100%;
   text-align: center;
 }
 
-/* Header Styling */
-h1 {
-  font-size: 2em;
-  font-weight: normal;
-  margin: 10px 0;
+h1, h2 {
+  color: #61dafb; /* Accent color */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(97, 218, 251, 0.8);
 }
 
 p {
   font-size: 1.2em;
   font-weight: 300;
-  margin: 10px 0;
+  color: #cfcfcf; /* Softer color for secondary text */
 }
 
-/* TimeDate Component Styling */
-.time-date {
-  font-size: 3em; /* Large font size for smart mirror effect */
-  margin: 20px 0;
-  font-weight: 300;
-}
-
-/* Weather Component Styling */
-.weather {
-  font-size: 1.5em;
-  margin: 20px 0;
-  text-align: center;
-}
-
-/* News Feed Component Styling */
-.news-feed {
-  font-size: 1.2em;
-  margin: 20px 0;
-  text-align: center;
-}
-
-.news-feed h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-.news-feed ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.news-feed li {
-  margin: 5px 0;
-}
-
-.news-feed a {
+a {
   color: #61dafb;
   text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.news-feed a:hover {
-  text-decoration: underline;
-}
-
-.news-feed li::before {
-  content: "• ";
-  color: #61dafb;
+a:hover {
+  color: #ffffff;
+  transform: scale(1.05);
 }

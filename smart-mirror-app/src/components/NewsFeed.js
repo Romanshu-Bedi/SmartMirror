@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/NewsFeed.css';
 
 const NewsFeed = () => {
   const [newsArticles, setNewsArticles] = useState([]);
@@ -30,6 +31,9 @@ const NewsFeed = () => {
       <ul>
         {newsArticles.map((article, index) => (
           <li key={index}>
+            {article.urlToImage && (
+              <img src={article.urlToImage} alt="News" className="news-image" />
+            )}
             <a href={article.url} target="_blank" rel="noopener noreferrer">
               {article.title}
             </a>

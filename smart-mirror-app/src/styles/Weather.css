@@ -1,0 +1,41 @@
+/* Container for the weather display, positioned in the top left */
+.weather-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif; /* Consistent font with App.css */
+  }
+  
+  /* Styling for the weather icon */
+  .weather-icon {
+    width: 70px; /* Slightly larger icon size for emphasis */
+    height: auto;
+    margin-right: 15px; /* Space between icon and temperature text */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); /* Subtle glow effect */
+  }
+  
+  /* Container for temperature and feels-like info */
+  .weather-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  /* Styling for the main temperature */
+  .temperature {
+    font-size: 4em; /* Larger font size for main temperature */
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), /* White glow */
+                 0 0 5px rgba(97, 218, 251, 0.5);   /* Subtle blue accent */
+  }
+  
+  /* Styling for feels-like temperature */
+  .feels-like {
+    font-size: 1.5em; /* Slightly larger font size */
+    color: #cfcfcf; /* Softer color for contrast */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Subtle glow effect */
+    margin-top: 5px;
+  }

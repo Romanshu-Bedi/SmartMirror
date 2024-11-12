@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { gapi } from 'gapi-script';
+import '../styles/CalendarEvents.css';
 
 const CalendarEvents = () => {
   const [events, setEvents] = useState([]);
@@ -7,7 +8,7 @@ const CalendarEvents = () => {
 
   const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
-  const CALENDAR_ID = "primary"; // "primary" refers to the user's main calendar
+  const CALENDAR_ID = "primary";
   const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const CalendarEvents = () => {
         });
       }).catch((err) => {
         console.error("Error initializing Google Calendar API:", err);
-        setError("Error initializing Google Calendar API: " + JSON.stringify(err, null, 2));
+        setError("Error initializing Google Calendar API.");
       });
     };
 
@@ -42,30 +43,30 @@ const CalendarEvents = () => {
     .then(response => {
       const events = response.result.items;
       setEvents(events);
-      console.log("Fetched Events:", events);  // Log to confirm events are fetched
       if (events.length === 0) {
         setError("No upcoming events found.");
       }
     })
     .catch((err) => {
       console.error("Error fetching events:", err);
-      setError("Error fetching events: " + JSON.stringify(err, null, 2));
+      setError("Error fetching events.");
     });
   };
 
-  if (error) return <div>{error}</div>;
-  if (!events || events.length === 0) return <div>Loading events...</div>;
-
   return (
     <div className="calendar-events">
-      <h2>Upcoming Events</h2>
-      <ul>
-        {events.map((event, index) => (
-          <li key={index}>
-            <strong>{event.summary}</strong> - {new Date(event.start.dateTime || event.start.date).toLocaleString()}
-          </li>
-        ))}
-      </ul>
+      <h2>Your Events</h2>
+      {error || events.length === 0 ? (
+        <p className="no-events">No upcoming events found.</p>
+      ) : (
+        <ul>
+          {events.map((event, index) => (
+            <li key={index}>
+              <strong>{event.summary}</strong> - {new Date(event.start.dateTime || event.start.date).toLocaleString()}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

@@ -1,0 +1,68 @@
+/* News feed container positioned at the bottom left */
+.news-feed {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    max-width: 350px;
+    text-align: left;
+  }
+  
+  /* Header styling without background container */
+  .news-feed h2 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #ffffff; /* White accent color */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Soft glow effect */
+  }
+  
+  /* List styling */
+  .news-feed ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* News item styling */
+  .news-feed li {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+  }
+  
+  /* Icon or bullet before each news item */
+  .news-feed li::before {
+    content: "• ";
+    color: #ffffff; /* White accent for bullet points */
+    font-size: 1.5em;
+    margin-right: 10px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); /* Subtle glow for bullets */
+  }
+  
+  /* News link styling */
+  .news-feed a {
+    color: #c1e1ff; /* Light blue for link text */
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease, transform 0.3s ease;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Soft glow effect */
+  }
+  
+  /* Hover effect for links */
+  .news-feed a:hover {
+    color: #ffffff;
+    transform: scale(1.05);
+  }
+  
+  /* Optional image styling for each news item */
+  .news-feed img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Slight shadow for images */
+  }

@@ -1,0 +1,25 @@
+/* FullScreenToggle.css */
+.fullscreen-button {
+  position: absolute;
+  bottom: 20px; /* Position at the bottom */
+  right: 20px; /* Position at the right */
+  font-size: 2em; /* Larger icon size */
+  color: #ffffff;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreen-button:hover {
+  transform: scale(1.2); /* Scale up on hover */
+}
+
+.fullscreen-button svg {
+  width: 35px;
+  height: 35px;
+  fill: #ffffff;
+}

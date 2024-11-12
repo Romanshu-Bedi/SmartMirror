@@ -1,0 +1,45 @@
+/* Container for calendar events, aligned to the bottom-right */
+.calendar-events {
+    position: absolute;
+    bottom: 80px; /* Moved slightly up from the bottom */
+    right: 20px;
+    font-size: 1.2em;
+    color: #ffffff;
+    max-width: 300px;
+    font-family: 'Roboto', sans-serif;
+    text-align: right;
+}
+
+/* Header styling */
+.calendar-events h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Subtle glow */
+    margin-bottom: 10px;
+}
+
+/* Styling for the "no events" placeholder text */
+.calendar-events .no-events {
+    color: #cfcfcf;
+    font-size: 1.1em;
+    margin-top: 5px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Event list styling */
+.calendar-events ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual event styling */
+.calendar-events li {
+    font-size: 1.2em;
+    color: #ffffff;
+    margin: 5px 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Soft glow */
+}

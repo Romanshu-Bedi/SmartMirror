@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/Weather.css';
 
 const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -35,14 +36,20 @@ const Weather = () => {
     getLocation();
   }, [apiKey]);
 
-  if (error) return <div>{error}</div>;
-  if (!weatherData) return <div>Loading weather...</div>;
+  if (error) return <div className="weather-container">{error}</div>;
+  if (!weatherData) return <div className="weather-container">Loading weather...</div>;
 
   return (
-    <div className="weather">
-      <h2>Weather in {weatherData.name}</h2>
-      <p>Temperature: {weatherData.main.temp}°C</p>
-      <p>Condition: {weatherData.weather[0].description}</p>
+    <div className="weather-container">
+      <img
+        src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+        alt="Weather Icon"
+        className="weather-icon"
+      />
+      <div className="weather-info">
+        <div className="temperature">{weatherData.main.temp}°</div>
+        <div className="feels-like">feels like {weatherData.main.feels_like}°</div>
+      </div>
     </div>
   );
 };
