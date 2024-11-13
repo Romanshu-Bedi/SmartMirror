@@ -20,7 +20,7 @@ const TodoList = () => {
 
   return (
     <div className="todo-list-container">
-      <h2>Todo List</h2>
+      <h2>To-do List</h2>
 
       <input
         type="text"
@@ -29,7 +29,7 @@ const TodoList = () => {
         placeholder="Add a new todo..."
         className="new-todo-input"
       />
-      <button onClick={handleAddTodo} className="add-todo-button">Submit</button>
+      <button onClick={handleAddTodo} className="add-todo-button">Add</button>
 
       <ul className="todo-list">
         {todos.map((todo, index) => (

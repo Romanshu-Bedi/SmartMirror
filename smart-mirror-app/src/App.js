@@ -7,19 +7,17 @@ import NewsFeed from './components/NewsFeed';
 import CalendarEvents from './components/CalendarEvents';
 import FullScreenToggle from './components/FullScreenToggle';
 import TodoList from './components/TodoList';
+import Greeting from './components/Greeting';
 
 function App() {
   return (
     <div className="App">
-      {/* To-Do List Button and List Display */}
-      <TodoList /> {/* Display To-Do List at the top center */}
-      
+      <Greeting /> {/* Display personalized greeting */}
+      <TodoList />
       <TimeDate />
       <Weather />
       <NewsFeed />
       <CalendarEvents />
-      
-      {/* Full-Screen Button in the bottom-right */}
       <FullScreenToggle />
     </div>
   );

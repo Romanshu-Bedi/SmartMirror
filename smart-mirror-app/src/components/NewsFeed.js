@@ -13,7 +13,11 @@ const NewsFeed = () => {
         const response = await axios.get(
           `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
         );
-        setNewsArticles(response.data.articles.slice(0, 5)); // Get the top 5 articles
+        // Filter out articles with title "[Removed]" and get the top 5 articles
+        const filteredArticles = response.data.articles
+          .filter(article => article.title !== "[Removed]")
+          .slice(0, 5);
+        setNewsArticles(filteredArticles);
       } catch (error) {
         setError('Failed to fetch news data');
       }
