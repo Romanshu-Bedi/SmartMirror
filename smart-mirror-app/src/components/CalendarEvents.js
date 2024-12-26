@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { gapi } from 'gapi-script';
-import '../styles/CalendarEvents.css';
+import React, { useState, useEffect, useCallback } from "react";
+import { gapi } from "gapi-script";
+import "../styles/CalendarEvents.css";
 
 const CalendarEvents = () => {
   const [events, setEvents] = useState([]);
@@ -13,57 +13,66 @@ const CalendarEvents = () => {
   const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
   const initializeGoogleClient = useCallback(() => {
-    gapi.load("client:auth2", () => {
-      gapi.client
-        .init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
-          scope: SCOPES,
-        })
-        .then(() => {
-          gapi.auth2.getAuthInstance().signIn().then(() => {
-            listUpcomingEvents();
+    if (typeof gapi !== "undefined") {
+      gapi.load("client:auth2", () => {
+        gapi.client
+          .init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+            scope: SCOPES,
+          })
+          .then(() => {
+            gapi.auth2.getAuthInstance().signIn().then(() => {
+              listUpcomingEvents();
+            });
+          })
+          .catch((err) => {
+            console.error("Error initializing Google Calendar API:", err);
+            setError("Error initializing Google Calendar API.");
           });
-        })
-        .catch((err) => {
-          console.error("Error initializing Google Calendar API:", err);
-          setError("Error initializing Google Calendar API.");
-        });
-    });
+      });
+    } else {
+      console.error("gapi not available");
+      setError("Google API is not available.");
+    }
   }, [API_KEY, CLIENT_ID, SCOPES]);
 
   const listUpcomingEvents = useCallback(() => {
-    gapi.client.calendar.events
-      .list({
-        calendarId: CALENDAR_ID,
-        timeMin: new Date().toISOString(),
-        showDeleted: false,
-        singleEvents: true,
-        maxResults: 5,
-        orderBy: "startTime",
-      })
-      .then((response) => {
-        const events = response.result.items;
-        setEvents(events);
-        if (events.length === 0) {
-          setError("No upcoming events found.");
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching events:", err);
-        setError("Error fetching events.");
-      });
+    if (typeof gapi !== "undefined") {
+      gapi.client.calendar.events
+        .list({
+          calendarId: CALENDAR_ID,
+          timeMin: new Date().toISOString(),
+          showDeleted: false,
+          singleEvents: true,
+          maxResults: 5,
+          orderBy: "startTime",
+        })
+        .then((response) => {
+          const events = response.result.items;
+          setEvents(events);
+          if (events.length === 0) {
+            setError("No upcoming events found.");
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching events:", err);
+          setError("Error fetching events.");
+        });
+    }
   }, [CALENDAR_ID]);
 
   useEffect(() => {
     if (!promptShown) {
-      const userAcknowledged = window.confirm(
-        "This app requires access to your Google Calendar. Do you wish to continue?"
-      );
-      setPromptShown(true); // Mark the prompt as shown
-      if (userAcknowledged) {
-        initializeGoogleClient();
+      if (typeof window !== "undefined") {
+        const userAcknowledged = window.confirm(
+          "This app requires access to your Google Calendar. Do you wish to continue?"
+        );
+        setPromptShown(true); // Mark the prompt as shown
+        if (userAcknowledged) {
+          initializeGoogleClient();
+        }
       }
     }
   }, [promptShown, initializeGoogleClient]);
@@ -72,7 +81,7 @@ const CalendarEvents = () => {
     <div className="calendar-events">
       <h2>Your Events</h2>
       {error || events.length === 0 ? (
-        <p className="no-events">No upcoming events found.</p>
+        <p className="no-events">{error || "No upcoming events found."}</p>
       ) : (
         <ul>
           {events.map((event, index) => (
