@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { gapi } from 'gapi-script';
 import '../styles/CalendarEvents.css';
 
@@ -12,19 +12,7 @@ const CalendarEvents = () => {
   const CALENDAR_ID = "primary";
   const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
-  useEffect(() => {
-    if (!promptShown) {
-      const userAcknowledged = window.confirm(
-        "This app requires access to your Google Calendar. Do you wish to continue?"
-      );
-      setPromptShown(true); // Mark the prompt as shown
-      if (userAcknowledged) {
-        initializeGoogleClient();
-      }
-    }
-  }, [promptShown]);
-
-  const initializeGoogleClient = () => {
+  const initializeGoogleClient = useCallback(() => {
     gapi.load("client:auth2", () => {
       gapi.client
         .init({
@@ -43,9 +31,9 @@ const CalendarEvents = () => {
           setError("Error initializing Google Calendar API.");
         });
     });
-  };
+  }, [API_KEY, CLIENT_ID, SCOPES]);
 
-  const listUpcomingEvents = () => {
+  const listUpcomingEvents = useCallback(() => {
     gapi.client.calendar.events
       .list({
         calendarId: CALENDAR_ID,
@@ -66,7 +54,19 @@ const CalendarEvents = () => {
         console.error("Error fetching events:", err);
         setError("Error fetching events.");
       });
-  };
+  }, [CALENDAR_ID]);
+
+  useEffect(() => {
+    if (!promptShown) {
+      const userAcknowledged = window.confirm(
+        "This app requires access to your Google Calendar. Do you wish to continue?"
+      );
+      setPromptShown(true); // Mark the prompt as shown
+      if (userAcknowledged) {
+        initializeGoogleClient();
+      }
+    }
+  }, [promptShown, initializeGoogleClient]);
 
   return (
     <div className="calendar-events">
