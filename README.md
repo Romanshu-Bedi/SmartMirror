@@ -9,3 +9,8 @@ The **Smart Mirror App** is an interactive application designed to display real-
 - **News Feed**: Fetches and displays the latest news headlines with clickable links.
 - **Calendar Events**: Integrates with Google Calendar to show upcoming events.
 - **Responsive Design**: Fully responsive grid-based layout for various screen sizes.
+
+## Live Application
+
+Check out the live app here:  
+[Smart Mirror - Live App](https://smartmirror-ruby.vercel.app/)
