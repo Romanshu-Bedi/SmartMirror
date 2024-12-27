@@ -15,25 +15,40 @@ const Weather = () => {
         );
         setWeatherData(response.data);
       } catch (error) {
+        console.error('Error fetching weather data:', error);
         setError('Failed to fetch weather data');
       }
     };
 
-    const getLocation = () => {
+    const requestLocationAccess = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
             fetchWeather(latitude, longitude);
           },
-          () => setError('Location access denied')
+          (error) => {
+            console.error('Error obtaining location:', error.message);
+            setError('Location access denied. Enable location to see weather information.');
+          }
         );
       } else {
         setError('Geolocation is not supported by this browser');
       }
     };
 
-    getLocation();
+    const askForLocationAccess = () => {
+      const userAcknowledged = window.confirm(
+        'This app needs your location to fetch weather updates. Do you want to grant location access?'
+      );
+      if (userAcknowledged) {
+        requestLocationAccess();
+      } else {
+        setError('Location access denied. Enable location to see weather information.');
+      }
+    };
+
+    askForLocationAccess();
   }, [apiKey]);
 
   if (error) return <div className="weather-container">{error}</div>;
@@ -42,7 +57,7 @@ const Weather = () => {
   return (
     <div className="weather-container">
       <img
-        src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+        src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
         alt="Weather Icon"
         className="weather-icon"
       />

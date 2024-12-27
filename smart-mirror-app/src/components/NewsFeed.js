@@ -11,15 +11,23 @@ const NewsFeed = () => {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
+          `https://newsdata.io/api/1/news?apikey=${apiKey}&country=us&language=en`
         );
-        // Filter out articles with title "[Removed]" and get the top 5 articles
-        const filteredArticles = response.data.articles
-          .filter(article => article.title !== "[Removed]")
-          .slice(0, 5);
+
+        // Filter articles: remove duplicates and those without images
+        const filteredArticles = response.data.results
+          .filter(
+            (article, index, self) =>
+              article.image_url && // Ensure article has an image
+              article.title && // Ensure article has a title
+              self.findIndex((a) => a.title === article.title) === index // Remove duplicates by title
+          )
+          .slice(0, 5); // Limit to top 5 articles
+
         setNewsArticles(filteredArticles);
       } catch (error) {
-        setError('Failed to fetch news data');
+        console.error("Error fetching news:", error);
+        setError("Failed to fetch news data");
       }
     };
 
@@ -35,10 +43,10 @@ const NewsFeed = () => {
       <ul>
         {newsArticles.map((article, index) => (
           <li key={index}>
-            {article.urlToImage && (
-              <img src={article.urlToImage} alt="News" className="news-image" />
+            {article.image_url && (
+              <img src={article.image_url} alt="News" className="news-image" />
             )}
-            <a href={article.url} target="_blank" rel="noopener noreferrer">
+            <a href={article.link} target="_blank" rel="noopener noreferrer">
               {article.title}
             </a>
           </li>

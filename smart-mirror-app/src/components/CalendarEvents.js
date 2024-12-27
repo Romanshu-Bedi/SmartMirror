@@ -5,7 +5,6 @@ import "../styles/CalendarEvents.css";
 const CalendarEvents = () => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
-  const [promptShown, setPromptShown] = useState(false);
 
   const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -25,6 +24,8 @@ const CalendarEvents = () => {
           .then(() => {
             gapi.auth2.getAuthInstance().signIn().then(() => {
               listUpcomingEvents();
+              // Save to localStorage to remember access granted
+              localStorage.setItem("calendarAccessGranted", "true");
             });
           })
           .catch((err) => {
@@ -64,18 +65,20 @@ const CalendarEvents = () => {
   }, [CALENDAR_ID]);
 
   useEffect(() => {
-    if (!promptShown) {
+    const accessGranted = localStorage.getItem("calendarAccessGranted");
+    if (accessGranted === "true") {
+      initializeGoogleClient(); // Initialize directly if access was already granted
+    } else {
       if (typeof window !== "undefined") {
         const userAcknowledged = window.confirm(
           "This app requires access to your Google Calendar. Do you wish to continue?"
         );
-        setPromptShown(true); // Mark the prompt as shown
         if (userAcknowledged) {
           initializeGoogleClient();
         }
       }
     }
-  }, [promptShown, initializeGoogleClient]);
+  }, [initializeGoogleClient]);
 
   return (
     <div className="calendar-events">
